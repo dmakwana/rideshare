@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="BOX-rH-HWz">
-                                <rect key="frame" x="20" y="56" width="560" height="195"/>
+                                <rect key="frame" x="20" y="56" width="560" height="250"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRz-5X-7Ln">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -58,8 +58,16 @@
                                             <action selector="dateEditing:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="A2w-rf-qF2"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Spots" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-HP-3vc">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OSo-e3-V7F">
                                         <rect key="frame" x="0.0" y="165" width="560" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="timeEditing:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="P9D-MX-MSz"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Spots" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-HP-3vc">
+                                        <rect key="frame" x="0.0" y="220" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -101,6 +109,7 @@
                         <outlet property="endLocField" destination="EsB-85-VVJ" id="2Mb-SU-vyd"/>
                         <outlet property="numSpotsField" destination="U5P-HP-3vc" id="TSt-uy-phi"/>
                         <outlet property="startLocField" destination="gRz-5X-7Ln" id="DHB-Mf-noP"/>
+                        <outlet property="timeField" destination="OSo-e3-V7F" id="J64-jf-NMe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -125,24 +134,29 @@
                                 <state key="normal" title="Search"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sVP-V0-yqX">
-                                <rect key="frame" x="20" y="80" width="560" height="336"/>
+                                <rect key="frame" x="20" y="80" width="560" height="150"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nIr-o6-pZY">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="dateEditing:" destination="IQV-fU-WOX" eventType="editingDidBegin" id="Trd-m8-dYj"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="End Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X6I-KC-5uK">
                                         <rect key="frame" x="0.0" y="60" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="vjP-SK-f9o">
-                                        <rect key="frame" x="0.0" y="120" width="560" height="216"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="480543844.10464197">
-                                            <!--2016-03-24 20:24:04 +0000-->
-                                        </date>
-                                    </datePicker>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CZ0-aA-K96">
+                                        <rect key="frame" x="0.0" y="120" width="560" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="dateEditing:" destination="IQV-fU-WOX" eventType="editingDidBegin" id="VMj-dc-8IQ"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -156,6 +170,11 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="47d-vc-RMT"/>
+                    <connections>
+                        <outlet property="dateField" destination="CZ0-aA-K96" id="fl7-3U-wx3"/>
+                        <outlet property="endLocField" destination="X6I-KC-5uK" id="FTR-Ek-aSb"/>
+                        <outlet property="startLocField" destination="nIr-o6-pZY" id="hd3-DJ-kz0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qy-zY-jop" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -173,26 +192,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-Ov-B8W">
-                                <rect key="frame" x="20" y="80" width="560" height="210"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-Ov-B8W">
+                                <rect key="frame" x="20" y="80" width="560" height="150"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-BA-aiq">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6rW-ga-nuX">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdp-E2-2y4">
                                         <rect key="frame" x="0.0" y="60" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdp-E2-2y4">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="inD-xL-2Ol">
                                         <rect key="frame" x="0.0" y="120" width="560" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="inD-xL-2Ol">
-                                        <rect key="frame" x="0.0" y="180" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -202,6 +216,9 @@
                                 <rect key="frame" x="275" y="419" width="51" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButton:" destination="qmC-hJ-b3k" eventType="touchUpInside" id="We2-aL-QNe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -214,6 +231,11 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings-Small" id="I2c-82-BeL"/>
+                    <connections>
+                        <outlet property="emailText" destination="xdp-E2-2y4" id="yS7-K1-tJu"/>
+                        <outlet property="nameText" destination="Mph-BA-aiq" id="cHM-am-cTU"/>
+                        <outlet property="numberText" destination="inD-xL-2Ol" id="db4-YE-JzH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrV-KX-NPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
