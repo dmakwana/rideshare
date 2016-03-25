@@ -11,15 +11,11 @@ import UIKit
 class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
-    
+    let user = User.sharedInstance
     
     @IBOutlet var nameText: UITextField!
     @IBOutlet var emailText: UITextField!
     @IBOutlet var numberText: UITextField!
-    
-    
-    let user = User.sharedInstance
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
