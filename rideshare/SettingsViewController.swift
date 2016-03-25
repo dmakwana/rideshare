@@ -37,6 +37,23 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    // MARK: Actions
+    
+    
+    // Limits number of characters for phone number
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        if (textField == numberText){
+            guard let number = numberText.text else { return true }
+            
+            let newLength = number.utf16.count + string.utf16.count - range.length
+            return newLength <= 10
+        }
+        return true
+    }
+    
+    
+    // Stops editing ability for name and email
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
         if((textField == nameText)||(textField == emailText)){
@@ -45,12 +62,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        print("hi");
-        if((textField == numberText)){
-            print("hello");
-        }
-    }
     
     @IBAction func saveButton(sender: UIButton) {
         
