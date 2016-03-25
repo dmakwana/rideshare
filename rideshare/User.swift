@@ -23,4 +23,16 @@ class User {
         print("User initiated");
     }
     
+    func getLoginDict() -> Dictionary<String, String>{
+        var dict = Dictionary<String, String>()
+        dict["facebook_id"] = facebook_id
+        dict["access_token"] = access_token
+        dict["full_name"] = full_name
+        dict["profile_picture"] = profile_picture
+        dict["phone_number"] = phone_number
+        dict["email"] = email
+        dict["car_name"] = car_name
+        return dict
+    }
+    
 }

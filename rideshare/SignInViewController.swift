@@ -14,11 +14,12 @@ class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Sign in view controller")
         // Do any additional setup after loading the view, typically from a nib.
         
         if (FBSDKAccessToken.currentAccessToken() != nil)
         {
-            returnUserData()
+            //returnUserData()
             // User is already logged in, do work such as go to next view controller.
         }
         let loginView : FBSDKLoginButton = FBSDKLoginButton()
@@ -26,6 +27,7 @@ class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
         loginView.center = self.view.center
         loginView.readPermissions = ["public_profile", "email", "user_friends"]
         loginView.delegate = self
+        returnUserData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,14 +90,20 @@ class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 let fbid: String = result.valueForKey("id") as! String
                 if (fbid != "") {
-                    let pp_url = "http://graph.facebook.com/" + fbid + "/picture?type=large"
+                    let pp_url = "http://graph.facebook.com/" + fbid + "/picture"
                     self.user.profile_picture = pp_url
+                    self.user.facebook_id = fbid
                 }
+                
                 
                 let access_token: String = FBSDKAccessToken.currentAccessToken().tokenString
                 if (access_token !=  "") {
                     self.user.access_token = access_token
                 }
+                
+                let userService = UserService()
+                userService.loginUserWithBackend()
+
             }
         })
     }
