@@ -10,7 +10,7 @@ import Foundation
 
 class RideService: NSObject {
     
-    func createNewRide(start: String, end: String, date: String, time: String, spots: String, active: Bool) {
+    func createNewRide(start: String, end: String, date: String, time: String, spots: Int, active: Bool) {
         
         let url = NSURL(string: "http://rideshare.supreet.ca/ride/new/")
         let user = User.sharedInstance
@@ -29,6 +29,30 @@ class RideService: NSObject {
         
         sendPOSTRequestWithParams(url!, params: params)
     }
+    
+    
+    func getLocations() {
+        
+        var ride = Ride.sharedInstance
+        
+        let url = NSURL(string: "http://rideshare.supreet.ca/ride/locations/")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url!) { (data, response, error) -> Void in
+            do {
+                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                ride.locations = (result?.valueForKey("locations")) as! NSArray
+                print(ride.locations)
+            } catch {
+                print("Error while parsing the result from HTTP POST request")
+            }
+        }
+        
+        task.resume()
+        
+        
+        
+    }
+    
     
     func sendPOSTRequestWithParams(url: NSURL, params: Dictionary<String, AnyObject>) {
         
