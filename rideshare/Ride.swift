@@ -19,7 +19,7 @@ class Ride: NSObject {
     var date = ""
     var time = ""
     var spots = 0
-    var active = true
+    var active = false
     
     var locations = []
     
