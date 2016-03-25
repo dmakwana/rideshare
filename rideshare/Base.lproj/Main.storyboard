@@ -94,6 +94,9 @@
                                 <rect key="frame" x="508" y="472" width="72" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="onSave" destination="8rJ-Kc-sve" eventType="touchUpInside" id="jcg-gh-rJ3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

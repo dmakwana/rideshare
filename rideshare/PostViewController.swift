@@ -20,6 +20,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var timePicker: UIDatePicker!
     var numSpotsPicker: UIPickerView!
     var pickerData = ["1","2","3","4"]
+    var rideService: rideService!
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -113,8 +114,16 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.timeField.text = dateFormatter.stringFromDate(self.timePicker.date)
     }
     
+    @IBAction func onSave() {
+//        rideService.()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        rideService = RideService()
+        //populate
+        
     }
 
     override func didReceiveMemoryWarning() {
