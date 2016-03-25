@@ -22,11 +22,13 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         nameText.delegate = self
         emailText.delegate = self
-        
+        numberText.delegate = self
         
         // Set values of name,email fields to Facebook data
         nameText.text = user.full_name
         emailText.text = user.email
+        
+        numberText.keyboardType = UIKeyboardType.NumberPad
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,14 +37,19 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    // MARK: Actions
-    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
         if((textField == nameText)||(textField == emailText)){
             return false
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        print("hi");
+        if((textField == numberText)){
+            print("hello");
+        }
     }
     
     @IBAction func saveButton(sender: UIButton) {
