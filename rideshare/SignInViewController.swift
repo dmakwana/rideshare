@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SignInViewController.swift
 //  rideshare
 //
 //  Created by Digvijay Makwana on 2016-03-13.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FBSDKLoginButtonDelegate {
+class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
