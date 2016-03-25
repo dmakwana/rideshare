@@ -9,12 +9,12 @@
         <!--Sign In-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController title="Sign In" id="9pv-A4-QxB" customClass="SignInController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Sign In" id="9pv-A4-QxB" customClass="SignInViewController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN" customClass="SignIn">
+                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="BOX-rH-HWz">
-                                <rect key="frame" x="20" y="56" width="560" height="381"/>
+                                <rect key="frame" x="20" y="56" width="560" height="195"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRz-5X-7Ln">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -50,16 +50,21 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sd9-vY-TF2">
-                                        <rect key="frame" x="0.0" y="110" width="560" height="216"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="480539907.74111301">
-                                            <!--2016-03-24 19:18:27 +0000-->
-                                        </date>
-                                    </datePicker>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Spots" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-HP-3vc">
-                                        <rect key="frame" x="0.0" y="351" width="560" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1oH-qI-Ei7">
+                                        <rect key="frame" x="0.0" y="110" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="dateEditing:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="A2w-rf-qF2"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Spots" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-HP-3vc">
+                                        <rect key="frame" x="0.0" y="165" width="560" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="numSpotsEditing:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="eWv-dM-Uhe"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -91,6 +96,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Post" image="Icon-Small-1" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="dateField" destination="1oH-qI-Ei7" id="ZJe-YS-L1k"/>
+                        <outlet property="endLocField" destination="EsB-85-VVJ" id="2Mb-SU-vyd"/>
+                        <outlet property="numSpotsField" destination="U5P-HP-3vc" id="TSt-uy-phi"/>
+                        <outlet property="startLocField" destination="gRz-5X-7Ln" id="DHB-Mf-noP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
