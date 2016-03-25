@@ -62,6 +62,10 @@ class RideService: NSObject {
         task.resume()
     }
     
+    func isRideActive() -> Bool {
+        let ride = Ride.sharedInstance
+        return ride.active
+    }
     
     func getLocations() {
         
