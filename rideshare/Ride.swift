@@ -13,7 +13,7 @@ class Ride: NSObject {
     static let sharedInstance = Ride()
     
     var ride_id = -1
-    var driver_id = -1
+    var driver_id = ""
     var start_location = ""
     var end_location = ""
     var date = ""
@@ -22,4 +22,5 @@ class Ride: NSObject {
     var active = true
     
     var locations = []
+    
 }
