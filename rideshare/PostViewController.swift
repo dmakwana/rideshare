@@ -10,6 +10,7 @@ import UIKit
 
 class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
 
+    @IBOutlet var activeField: UISwitch!
     @IBOutlet var startLocField: UITextField!
     @IBOutlet var dateField: UITextField!
     @IBOutlet var timeField: UITextField!
@@ -115,14 +116,19 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     @IBAction func onSave() {
-//        rideService.()
-        
+        let startLoc = startLocField.text
+        let endLoc = endLocField.text
+        let dateText = dateField.text
+        let timeString = timeField.text
+        let numSpots = Int(numSpotsField.text!)
+        let activeBool = activeField.on
+        rideService.createNewRide(start: startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         rideService = RideService()
-        //populate
+        
         
     }
 
