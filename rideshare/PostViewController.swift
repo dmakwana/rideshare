@@ -12,9 +12,12 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
     @IBOutlet var startLocField: UITextField!
     @IBOutlet var dateField: UITextField!
+    @IBOutlet var timeField: UITextField!
     @IBOutlet var endLocField: UITextField!
     @IBOutlet var numSpotsField: UITextField!
+    
     var datePicker: UIDatePicker!
+    var timePicker: UIDatePicker!
     var numSpotsPicker: UIPickerView!
     var pickerData = ["1","2","3","4"]
     
@@ -40,6 +43,28 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.numSpotsField.inputView = self.numSpotsPicker
         self.numSpotsPicker.delegate = self
         self.numSpotsPicker.dataSource = self
+    }
+    
+    @IBAction func timeEditing(sender: UITextField) {
+        self.timePicker = UIDatePicker()
+        self.timePicker.datePickerMode = UIDatePickerMode.Time
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor.purpleColor()
+        toolBar.sizeToFit()
+        
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "doneTimePicker")
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        
+        self.timeField.inputView = self.timePicker
+        self.timeField.inputAccessoryView = toolBar
+        
+        self.timePicker.addTarget(self, action: Selector("timePickerValueChanged"), forControlEvents: UIControlEvents.ValueChanged);
     }
 
     @IBAction func dateEditing(sender: UITextField) {
@@ -68,12 +93,24 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.dateField.resignFirstResponder()
     }
     
+    func doneTimePicker() {
+        self.timeField.resignFirstResponder()
+    }
+    
     func datePickerValueChanged() {
         print("Date Picker Value Changed");
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
         self.dateField.text = dateFormatter.stringFromDate(self.datePicker.date)
+    }
+    
+    func timePickerValueChanged() {
+        print("Time Picker Value Changed");
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        self.timeField.text = dateFormatter.stringFromDate(self.timePicker.date)
     }
     
     override func viewDidLoad() {
