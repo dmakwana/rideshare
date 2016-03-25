@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -9,12 +9,12 @@
         <!--Sign In-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController title="Sign In" id="9pv-A4-QxB" customClass="FirstViewController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Sign In" id="9pv-A4-QxB" customClass="SignInController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
+                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN" customClass="SignIn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -28,7 +28,7 @@
         <!--Post-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController title="Post" id="8rJ-Kc-sve" customClass="SecondViewController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Post" id="8rJ-Kc-sve" customClass="PostViewController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -99,7 +99,7 @@
         <!--Search-->
         <scene sceneID="5CT-Q7-bxh">
             <objects>
-                <viewController title="Search" id="IQV-fU-WOX" sceneMemberID="viewController">
+                <viewController title="Search" id="IQV-fU-WOX" customClass="SearchViewController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bah-8D-adg"/>
                         <viewControllerLayoutGuide type="bottom" id="Ygf-Eq-2Lf"/>
@@ -153,7 +153,7 @@
         <!--Settings-->
         <scene sceneID="2p8-kX-RTT">
             <objects>
-                <viewController title="Settings" id="qmC-hJ-b3k" sceneMemberID="viewController">
+                <viewController title="Settings" id="qmC-hJ-b3k" customClass="SettingsViewController" customModule="rideshare" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="crj-pi-fwF"/>
                         <viewControllerLayoutGuide type="bottom" id="xZW-h3-PeD"/>

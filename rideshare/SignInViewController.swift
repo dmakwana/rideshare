@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SignInViewController.swift
 //  rideshare
 //
 //  Created by Digvijay Makwana on 2016-03-13.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FBSDKLoginButtonDelegate {
+class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     let user = User.sharedInstance
     
@@ -21,13 +21,11 @@ class FirstViewController: UIViewController, FBSDKLoginButtonDelegate {
             returnUserData()
             // User is already logged in, do work such as go to next view controller.
         }
-            let loginView : FBSDKLoginButton = FBSDKLoginButton()
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
-            loginView.readPermissions = ["public_profile", "email", "user_friends"]
-            loginView.delegate = self
-        
-        
+        let loginView : FBSDKLoginButton = FBSDKLoginButton()
+        self.view.addSubview(loginView)
+        loginView.center = self.view.center
+        loginView.readPermissions = ["public_profile", "email", "user_friends"]
+        loginView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
