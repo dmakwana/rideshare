@@ -44,11 +44,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="startLocEditing:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="NRW-kK-bhC"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="End Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EsB-85-VVJ">
                                         <rect key="frame" x="0.0" y="55" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="endLocEditing:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="OPk-hP-gAi"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1oH-qI-Ei7">
                                         <rect key="frame" x="0.0" y="110" width="560" height="30"/>
@@ -112,6 +118,7 @@
                         <outlet property="dateField" destination="1oH-qI-Ei7" id="ZJe-YS-L1k"/>
                         <outlet property="endLocField" destination="EsB-85-VVJ" id="2Mb-SU-vyd"/>
                         <outlet property="numSpotsField" destination="U5P-HP-3vc" id="TSt-uy-phi"/>
+                        <outlet property="saveButton" destination="DNJ-Io-zTV" id="Pqe-xn-wBF"/>
                         <outlet property="startLocField" destination="gRz-5X-7Ln" id="DHB-Mf-noP"/>
                         <outlet property="timeField" destination="OSo-e3-V7F" id="J64-jf-NMe"/>
                     </connections>
@@ -148,13 +155,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="dateEditing:" destination="IQV-fU-WOX" eventType="editingDidBegin" id="Trd-m8-dYj"/>
+                                            <action selector="startLocEditing:" destination="IQV-fU-WOX" eventType="editingDidBegin" id="GCr-lB-hbQ"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="End Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X6I-KC-5uK">
                                         <rect key="frame" x="0.0" y="60" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="endLocEditing:" destination="IQV-fU-WOX" eventType="editingDidBegin" id="pq6-ZK-S2N"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CZ0-aA-K96">
                                         <rect key="frame" x="0.0" y="120" width="560" height="30"/>
@@ -180,6 +190,7 @@
                     <connections>
                         <outlet property="dateField" destination="CZ0-aA-K96" id="fl7-3U-wx3"/>
                         <outlet property="endLocField" destination="X6I-KC-5uK" id="FTR-Ek-aSb"/>
+                        <outlet property="searchButton" destination="msT-MK-YCi" id="oWP-Fd-qYz"/>
                         <outlet property="startLocField" destination="nIr-o6-pZY" id="hd3-DJ-kz0"/>
                     </connections>
                 </viewController>

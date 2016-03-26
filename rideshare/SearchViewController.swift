@@ -8,12 +8,26 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
-    @IBOutlet var dateField: UITextField!
-    @IBOutlet var endLocField: UITextField!
+    enum PickerTag: Int {
+        case StartLocPickerTag
+        case EndLocPickerTag
+    }
+
     @IBOutlet var startLocField: UITextField!
+    @IBOutlet var endLocField: UITextField!
+    @IBOutlet var dateField: UITextField!
+    @IBOutlet var searchButton: UIButton!
+
+    var ride = Ride.sharedInstance
+    var startLocPicker: UIPickerView!
+    var endLocPicker: UIPickerView!
     var datePicker: UIDatePicker!
+    var startIdx = -1
+    var endIdx = -1
+    var locationArray: [String]!
+    var locHelper = LocationHelper()
     
     @IBAction func dateEditing(sender: UITextField) {
         self.datePicker = UIDatePicker()
@@ -40,6 +54,81 @@ class SearchViewController: UIViewController {
     func doneDatePicker() {
         self.dateField.resignFirstResponder()
     }
+
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let tag = PickerTag(rawValue: pickerView.tag) {
+            switch tag {
+            case PickerTag.StartLocPickerTag:
+                return self.locHelper.getActualSize(LocationHelper.LocationPickerTag.StartLocPickerTag, startIdx: startIdx, endIdx: endIdx, locArrayLength: locationArray.count)
+            case PickerTag.EndLocPickerTag:
+                return self.locHelper.getActualSize(LocationHelper.LocationPickerTag.EndLocPickerTag, startIdx: self.startIdx, endIdx: self.endIdx, locArrayLength: self.locationArray.count)
+            }
+        }
+        return 0
+    }
+
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if let tag = PickerTag(rawValue: pickerView.tag) {
+            switch tag {
+            case PickerTag.StartLocPickerTag:
+                return self.locHelper.getActualString(LocationHelper.LocationPickerTag.StartLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx, locationArray: self.locationArray)
+            case PickerTag.EndLocPickerTag:
+                return self.locHelper.getActualString(LocationHelper.LocationPickerTag.EndLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx, locationArray: self.locationArray)
+            }
+        }
+        return ""
+    }
+
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if let tag = PickerTag(rawValue: pickerView.tag) {
+            switch tag {
+            case PickerTag.StartLocPickerTag:
+                self.startIdx = self.locHelper.getActualRow(LocationHelper.LocationPickerTag.StartLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx)
+                startLocField.text = locationArray[self.startIdx]
+                updateSearchButton()
+                self.startLocField.resignFirstResponder()
+            case PickerTag.EndLocPickerTag:
+                self.endIdx = self.locHelper.getActualRow(LocationHelper.LocationPickerTag.EndLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx)
+                endLocField.text = locationArray[self.endIdx]
+                updateSearchButton()
+                self.endLocField.resignFirstResponder()
+            }
+        }
+    }
+    
+    func checkFieldsHaveValue() ->Bool {
+        return ((self.startLocField.text != "") &&
+            (self.endLocField.text != "") &&
+            (self.dateField.text != ""))
+    }
+    
+    func updateSearchButton() {
+        if (checkFieldsHaveValue()) {
+            self.searchButton.enabled = true
+        } else {
+            self.searchButton.enabled = false
+        }
+    }
+
+    @IBAction func startLocEditing(sender: UITextField) {
+        self.startLocPicker = UIPickerView()
+        self.startLocPicker.tag = PickerTag.StartLocPickerTag.rawValue
+        self.startLocField.inputView = self.startLocPicker
+        self.startLocPicker.delegate = self
+        self.startLocPicker.dataSource = self
+    }
+
+    @IBAction func endLocEditing(sender: UITextField) {
+        self.endLocPicker = UIPickerView()
+        self.endLocPicker.tag = PickerTag.EndLocPickerTag.rawValue
+        self.endLocField.inputView = self.endLocPicker
+        self.endLocPicker.delegate = self
+        self.endLocPicker.dataSource = self
+    }
     
     func datePickerValueChanged() {
         print("Date Picker Value Changed");
@@ -47,6 +136,7 @@ class SearchViewController: UIViewController {
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
         self.dateField.text = dateFormatter.stringFromDate(self.datePicker.date)
+        updateSearchButton()
     }
     
     @IBAction func searchRides(sender: UIButton) {
@@ -65,5 +155,10 @@ class SearchViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.locationArray = self.ride.locations as! [String]
+        updateSearchButton()
+    }
     
 }

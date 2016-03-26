@@ -13,10 +13,10 @@ class User {
     static let sharedInstance = User()
     var facebook_id = ""
     var access_token = ""
-    var full_name = "Diggy"
+    var full_name = ""
     var profile_picture = ""
     var phone_number = ""
-    var email = "diggy@uw.com"
+    var email = ""
     var car_name = ""
     
     init() {
