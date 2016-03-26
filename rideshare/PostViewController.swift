@@ -125,7 +125,8 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         let activeBool = activeField.on
         
         print(numSpots)
-        rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
+        //rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
+        rideService.searchRides("Waterloo", end_location: "Toronto", date: "Apr 26, 2016")
     }
     
     override func viewDidLoad() {

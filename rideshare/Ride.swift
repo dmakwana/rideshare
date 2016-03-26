@@ -25,13 +25,25 @@ class Ride: NSObject {
     
     func updateRide(result: NSDictionary) {
         self.active = result.valueForKey("active") as! Bool
-        self.date = result.valueForKey("date") as! String
-        self.time = result.valueForKey("time") as! String
         self.driver_id = result.valueForKey("driver") as! String
         self.start_location = result.valueForKey("start_location") as! String
         self.end_location = result.valueForKey("end_location") as! String
         self.spots = result.valueForKey("spots") as! Int
         self.ride_id = result.valueForKey("ride_id") as! Int
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date_object = dateFormatter.dateFromString(result.valueForKey("date") as! String)
+        dateFormatter.dateStyle = .MediumStyle
+        self.date = dateFormatter.stringFromDate(date_object!)
+        print(self.date)
+        
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "HH:mm:ss"
+        let time_object = timeFormatter.dateFromString(result.valueForKey("time") as! String)
+        timeFormatter.timeStyle = .ShortStyle
+        self.time = timeFormatter.stringFromDate(time_object!)
+        print(self.time)
     }
     
 }

@@ -13,8 +13,6 @@ class RideService: NSObject {
     
     func saveRide(start: String, end: String, date: String, time: String, spots: Int, active: Bool) {
         
-        print("HELLPO")
-        
         let ride = Ride.sharedInstance
         
         let url = NSURL(string: "http://rideshare.supreet.ca/ride/save/")
@@ -29,7 +27,6 @@ class RideService: NSObject {
         ride_dict["time"] = time
         ride_dict["spots"] = spots
         ride_dict["active"] = active
-        print(ride_dict)
         
         var params = Dictionary<String, AnyObject>()
         params["ride_dict"] = ride_dict
@@ -50,7 +47,6 @@ class RideService: NSObject {
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-                print(result)
                 ride.updateRide(result!)
                                 
             } catch {
@@ -77,13 +73,53 @@ class RideService: NSObject {
         let task = session.dataTaskWithURL(url!) { (data, response, error) -> Void in
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-                print(result)
+                ride.updateRide(result!)
             } catch {
                 print("Error while parsing the result from HTTP POST request")
             }
         }
         
         task.resume()
+    }
+    
+    func searchRides(start_location: String!, end_location: String!, date: String!) {
+        
+        
+        let url = NSURL(string: "http://rideshare.supreet.ca/ride/search/")
+        
+        var search_dict = Dictionary<String, String>()
+        search_dict["start_location"] = start_location
+        search_dict["end_location"] = end_location
+        search_dict["date"] = date
+        
+        var params = Dictionary<String, AnyObject>()
+        params["search_dict"] = search_dict
+        
+        let request = NSMutableURLRequest(URL: url!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        request.HTTPMethod = "POST"
+        
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+        } catch {
+            print("Error while serializing params to POST Body")
+        }
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            do {
+                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                print(result)
+                
+            } catch {
+                print("Error while parsing the result from HTTP POST request")
+            }
+        }
+        
+        task.resume()
+
     }
     
     
@@ -97,7 +133,6 @@ class RideService: NSObject {
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 ride.locations = (result?.valueForKey("locations")) as! NSArray
-                print(ride.locations)
             } catch {
                 print("Error while parsing the result from HTTP POST request")
             }
