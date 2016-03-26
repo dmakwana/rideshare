@@ -203,6 +203,9 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         let numSpotString = numSpotsField.text!
         let numSpots = Int(numSpotString)!
         let activeBool = activeField.on
+        
+        activeField.setOn(true, animated: true)
+        activeSwitch(activeField)
 
         print(numSpots)
         rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
@@ -210,11 +213,11 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     
     @IBAction func activeSwitch(sender: UISwitch) {
-        if(activeField.on){
+        if(sender.on){
             activePostLabel.textColor = UIColor.greenColor()
         }
         else {
-            activePostLabel.textColor = UIColor.grayColor()
+            activePostLabel.textColor = UIColor.lightGrayColor()
         }
     }
 
