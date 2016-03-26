@@ -42,6 +42,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var ride = Ride.sharedInstance
     var startIdx = -1
     var endIdx = -1
+    var locationArray: [String]!
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -74,12 +75,12 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             idx = self.startIdx
         }
         if (idx == -1) {
-            return String(locations[row])
+            return String(locationArray[row])
         } else {
             if (row < idx) {
-                return String(locations[row])
+                return String(locationArray[row])
             } else {
-                return String(locations[row + 1])
+                return String(locationArray[row + 1])
             }
         }
     }
@@ -92,18 +93,18 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             idx = self.startIdx
         }
         if (idx == -1) {
-            return self.ride.locations.count
+            return self.locationArray.count
         } else {
-            return (self.ride.locations.count - 1)
+            return (self.locationArray.count - 1)
         }
     }
     
     func updateSelectedIdx() {
-        if (self.ride.locations.indexOf(self.ride.start_location) != nil) {
-            self.startIdx = self.ride.locations.indexOf(self.ride.start_location)!
+        if (self.locationArray.indexOf(self.ride.start_location) != nil) {
+            self.startIdx = self.locationArray.indexOf(self.ride.start_location)!
         }
-        if (self.ride.locations.indexOf(self.ride.end_location) != nil) {
-            self.endIdx = self.ride.locations.indexOf(self.ride.end_location)!
+        if (self.locationArray.indexOf(self.ride.end_location) != nil) {
+            self.endIdx = self.locationArray.indexOf(self.ride.end_location)!
         }
     }
     
@@ -273,7 +274,8 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             self.endLocField.text = self.ride.end_location
         }
         updateSelectedIdx()
-        print(self.locations)
+        self.locationArray = self.ride.locations as! [String]
+        print(self.locationArray)
     }
 
     override func didReceiveMemoryWarning() {
