@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround() 
+        self.hideKeyboardWhenTappedAround()     
         // Do any additional setup after loading the view, typically from a nib.
         nameText.delegate = self
         emailText.delegate = self
