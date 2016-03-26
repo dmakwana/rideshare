@@ -10,6 +10,7 @@ import UIKit
 
 class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
 
+    @IBOutlet var activeField: UISwitch!
     @IBOutlet var startLocField: UITextField!
     @IBOutlet var dateField: UITextField!
     @IBOutlet var timeField: UITextField!
@@ -20,6 +21,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var timePicker: UIDatePicker!
     var numSpotsPicker: UIPickerView!
     var pickerData = ["1","2","3","4"]
+    var rideService: RideService!
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -113,8 +115,20 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.timeField.text = dateFormatter.stringFromDate(self.timePicker.date)
     }
     
+    @IBAction func onSave() {
+        let startLoc = startLocField.text!
+        let endLoc = endLocField.text!
+        let dateText = dateField.text!
+        let timeString = timeField.text!
+        let numSpots = Int(numSpotsField.text!)
+        let activeBool = activeField.on
+        rideService.createNewRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots!, active: activeBool)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let rideService = RideService()
+        activeField.on = rideService.isRideActive()
     }
 
     override func didReceiveMemoryWarning() {
