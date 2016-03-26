@@ -23,6 +23,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet var endLocField: UITextField!
     @IBOutlet var numSpotsField: UITextField!
     @IBOutlet var saveButton: UIButton!
+    @IBOutlet var activePostLabel: UILabel!
 
     var startLocPicker: UIPickerView!
     var endLocPicker: UIPickerView!
@@ -206,6 +207,16 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         print(numSpots)
         rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
     }
+    
+    
+    @IBAction func activeSwitch(sender: UISwitch) {
+        if(activeField.on){
+            activePostLabel.textColor = UIColor.greenColor()
+        }
+        else {
+            activePostLabel.textColor = UIColor.grayColor()
+        }
+    }
 
     func checkFieldsHaveValue() ->Bool {
         return ((self.startLocField.text != "") &&
@@ -222,6 +233,8 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             self.saveButton.enabled = false
         }
     }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -100,11 +100,14 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activate Post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcI-PJ-v7Z">
                                         <rect key="frame" x="0.0" y="0.0" width="113" height="31"/>
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="19"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HiE-Ms-dbT">
                                         <rect key="frame" x="143" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="activeSwitch:" destination="8rJ-Kc-sve" eventType="valueChanged" id="y1t-Kk-j4r"/>
+                                        </connections>
                                     </switch>
                                 </subviews>
                             </stackView>
@@ -141,6 +144,7 @@
                     <tabBarItem key="tabBarItem" title="Post" image="Icon-Small-1" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="activeField" destination="HiE-Ms-dbT" id="L3X-U6-DPC"/>
+                        <outlet property="activePostLabel" destination="wcI-PJ-v7Z" id="uzw-eR-x32"/>
                         <outlet property="dateField" destination="1oH-qI-Ei7" id="ZJe-YS-L1k"/>
                         <outlet property="endLocField" destination="EsB-85-VVJ" id="2Mb-SU-vyd"/>
                         <outlet property="numSpotsField" destination="U5P-HP-3vc" id="TSt-uy-phi"/>
