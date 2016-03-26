@@ -10,14 +10,18 @@ import Foundation
 
 class RideService: NSObject {
     
-    func createNewRide(start: String, end: String, date: String, time: String, spots: Int, active: Bool) {
+    
+    func saveRide(start: String, end: String, date: String, time: String, spots: Int, active: Bool) {
+        
+        print("HELLPO")
         
         let ride = Ride.sharedInstance
         
-        let url = NSURL(string: "http://rideshare.supreet.ca/ride/new/")
+        let url = NSURL(string: "http://rideshare.supreet.ca/ride/save/")
         let user = User.sharedInstance
         
         var ride_dict = Dictionary<String, AnyObject>()
+        ride_dict["ride_id"] = ride.ride_id
         ride_dict["facebook_id"] = user.facebook_id
         ride_dict["start_location"] = start
         ride_dict["end_location"] = end
@@ -25,6 +29,7 @@ class RideService: NSObject {
         ride_dict["time"] = time
         ride_dict["spots"] = spots
         ride_dict["active"] = active
+        print(ride_dict)
         
         var params = Dictionary<String, AnyObject>()
         params["ride_dict"] = ride_dict
@@ -45,14 +50,8 @@ class RideService: NSObject {
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-                ride.active = result!.valueForKey("active") as! Bool
-                ride.date = result!.valueForKey("date") as! String
-                ride.time = result!.valueForKey("time") as! String
-                ride.driver_id = result!.valueForKey("driver") as! String
-                ride.start_location = result?.valueForKey("start_location") as! String
-                ride.end_location = result?.valueForKey("end_location") as! String
-                ride.spots = result!.valueForKey("spots") as! Int
-                ride.ride_id = result!.valueForKey("ride_id") as! Int
+                print(result)
+                ride.updateRide(result!)
                                 
             } catch {
                 print("Error while parsing the result from HTTP POST request")
@@ -66,6 +65,27 @@ class RideService: NSObject {
         let ride = Ride.sharedInstance
         return ride.active
     }
+    
+    
+    func getRideFromServer() {
+        
+        print("Get Ride from Server")
+        let ride = Ride.sharedInstance
+        
+        let url = NSURL(string: "http://rideshare.supreet.ca/ride/fetch/")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url!) { (data, response, error) -> Void in
+            do {
+                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                print(result)
+            } catch {
+                print("Error while parsing the result from HTTP POST request")
+            }
+        }
+        
+        task.resume()
+    }
+    
     
     func getLocations() {
         

@@ -14,6 +14,7 @@ class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Ride.sharedInstance.ride_id)
         print("Sign in view controller")
         // Do any additional setup after loading the view, typically from a nib.
         

@@ -120,15 +120,19 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         let endLoc = endLocField.text!
         let dateText = dateField.text!
         let timeString = timeField.text!
-        let numSpots = Int(numSpotsField.text!)
+        let numSpotString = numSpotsField.text!
+        let numSpots = Int(numSpotString)!
         let activeBool = activeField.on
-        rideService.createNewRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots!, active: activeBool)
+        
+        print(numSpots)
+        rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let rideService = RideService()
+        rideService = RideService()
         activeField.on = rideService.isRideActive()
+        print(Ride.sharedInstance.ride_id)
     }
 
     override func didReceiveMemoryWarning() {

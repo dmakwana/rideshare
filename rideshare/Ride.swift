@@ -23,4 +23,15 @@ class Ride: NSObject {
     
     var locations = []
     
+    func updateRide(result: NSDictionary) {
+        self.active = result.valueForKey("active") as! Bool
+        self.date = result.valueForKey("date") as! String
+        self.time = result.valueForKey("time") as! String
+        self.driver_id = result.valueForKey("driver") as! String
+        self.start_location = result.valueForKey("start_location") as! String
+        self.end_location = result.valueForKey("end_location") as! String
+        self.spots = result.valueForKey("spots") as! Int
+        self.ride_id = result.valueForKey("ride_id") as! Int
+    }
+    
 }
