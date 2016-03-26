@@ -18,11 +18,6 @@ class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("Sign in view controller")
         // Do any additional setup after loading the view, typically from a nib.
         
-        if (FBSDKAccessToken.currentAccessToken() != nil)
-        {
-            //returnUserData()
-            // User is already logged in, do work such as go to next view controller.
-        }
         let loginView : FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)
         loginView.center = self.view.center
@@ -34,7 +29,13 @@ class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        if (FBSDKAccessToken.currentAccessToken() != nil)
+        {
+            self.tabBarController!.selectedIndex = 1;
+            self.tabBarController!.selectedViewController = self.tabBarController?.viewControllers![1]
+        }
     }
+    
     
     
     // Facebook Delegate Methods
