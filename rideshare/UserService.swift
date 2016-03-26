@@ -56,6 +56,7 @@ class UserService: NSObject {
         var update_dict = Dictionary<String, String>()
         update_dict["facebook_id"] = user.facebook_id
         update_dict["phone_number"] = user.phone_number
+        update_dict["car_name"] = user.car_name
         
         var params = Dictionary<String, AnyObject>()
         params["update_dict"] = update_dict
