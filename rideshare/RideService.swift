@@ -57,6 +57,7 @@ class RideService: NSObject {
         task.resume()
     }
     
+    
     func isRideActive() -> Bool {
         let ride = Ride.sharedInstance
         return ride.active
@@ -82,12 +83,14 @@ class RideService: NSObject {
         task.resume()
     }
     
+    
+    
+   
     func searchRides(start_location: String!, end_location: String!, date: String!) {
-        
         
         let url = NSURL(string: "http://rideshare.supreet.ca/ride/search/")
         
-        var search_dict = Dictionary<String, String>()
+        var search_dict = Dictionary<String, AnyObject>()
         search_dict["start_location"] = start_location
         search_dict["end_location"] = end_location
         search_dict["date"] = date
@@ -111,6 +114,7 @@ class RideService: NSObject {
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                NSNotificationCenter.defaultCenter().postNotificationName("dataLoaded", object: result)
                 print(result)
                 
             } catch {
@@ -118,6 +122,7 @@ class RideService: NSObject {
             }
         }
         
+        print("Searching rides")
         task.resume()
 
     }

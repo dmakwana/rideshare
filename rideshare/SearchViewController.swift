@@ -49,12 +49,12 @@ class SearchViewController: UIViewController {
         self.dateField.text = dateFormatter.stringFromDate(self.datePicker.date)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    @IBAction func searchRides(sender: UIButton) {
+        let rideService = RideService()
+        rideService.searchRides(startLocField.text!, end_location: endLocField.text!, date: self.dateField.text!)
+        
+        let controller: DisplaySearchResultsViewController = DisplaySearchResultsViewController.init(nibName: nil, bundle: nil)
+        self.navigationController?.pushViewController(controller, animated: false)
     }
     
     
