@@ -62,8 +62,7 @@ class RideService: NSObject {
         let ride = Ride.sharedInstance
         return ride.active
     }
-    
-    
+
     func getRideFromServer() {
         
         print("Get Ride from Server")
@@ -126,9 +125,8 @@ class RideService: NSObject {
         task.resume()
 
     }
-    
-    
-    func getLocations() {
+
+    func getLocations() -> NSArray {
         
         let ride = Ride.sharedInstance
         
@@ -144,6 +142,7 @@ class RideService: NSObject {
         }
         
         task.resume()
+        return ride.locations
         
     }
 

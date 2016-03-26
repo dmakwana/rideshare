@@ -16,6 +16,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet var timeField: UITextField!
     @IBOutlet var endLocField: UITextField!
     @IBOutlet var numSpotsField: UITextField!
+    @IBOutlet var carField: UITextField!
     
     var datePicker: UIDatePicker!
     var timePicker: UIDatePicker!
