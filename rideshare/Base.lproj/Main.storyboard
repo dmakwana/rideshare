@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="BOX-rH-HWz">
-                                <rect key="frame" x="20" y="56" width="560" height="305"/>
+                                <rect key="frame" x="20" y="56" width="560" height="250"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRz-5X-7Ln">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -72,13 +72,8 @@
                                             <action selector="timeEditing:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="P9D-MX-MSz"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Car Make/Model" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEB-HC-4HC">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Spots" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-HP-3vc">
                                         <rect key="frame" x="0.0" y="220" width="560" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Spots" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-HP-3vc">
-                                        <rect key="frame" x="0.0" y="275" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -120,10 +115,10 @@
                     <tabBarItem key="tabBarItem" title="Post" image="Icon-Small-1" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="activeField" destination="HiE-Ms-dbT" id="L3X-U6-DPC"/>
-                        <outlet property="carField" destination="dEB-HC-4HC" id="yjh-Zb-eIv"/>
                         <outlet property="dateField" destination="1oH-qI-Ei7" id="ZJe-YS-L1k"/>
                         <outlet property="endLocField" destination="EsB-85-VVJ" id="2Mb-SU-vyd"/>
                         <outlet property="numSpotsField" destination="U5P-HP-3vc" id="TSt-uy-phi"/>
+                        <outlet property="saveButton" destination="DNJ-Io-zTV" id="Pqe-xn-wBF"/>
                         <outlet property="startLocField" destination="gRz-5X-7Ln" id="DHB-Mf-noP"/>
                         <outlet property="timeField" destination="OSo-e3-V7F" id="J64-jf-NMe"/>
                     </connections>

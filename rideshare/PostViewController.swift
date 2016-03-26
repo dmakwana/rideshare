@@ -27,7 +27,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet var timeField: UITextField!
     @IBOutlet var endLocField: UITextField!
     @IBOutlet var numSpotsField: UITextField!
-    @IBOutlet var carField: UITextField!
+    @IBOutlet var saveButton: UIButton!
     
     var startLocPicker: UIPickerView!
     var endLocPicker: UIPickerView!
@@ -141,14 +141,17 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             switch tag {
             case PickerTag.NumSpotsPickerTag:
                 numSpotsField.text = pickerData[row]
+                updateSave()
                 self.numSpotsField.resignFirstResponder()
             case PickerTag.StartLocPickerTag:
                 self.startIdx = getActualRow(LocationPickerTag.StartLocPickerTag, row: row)
                 startLocField.text = String(locations[getActualRow(LocationPickerTag.StartLocPickerTag, row: row)])
+                updateSave()
                 self.startLocField.resignFirstResponder()
             case PickerTag.EndLocPickerTag:
                 self.endIdx = getActualRow((LocationPickerTag.EndLocPickerTag), row: row)
                 endLocField.text = String(locations[getActualRow(LocationPickerTag.EndLocPickerTag, row: row)])
+                updateSave()
                 self.endLocField.resignFirstResponder()
             }
         }
@@ -236,6 +239,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
         self.dateField.text = dateFormatter.stringFromDate(self.datePicker.date)
+        updateSave()
     }
     
     func timePickerValueChanged() {
@@ -244,6 +248,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         dateFormatter.dateStyle = NSDateFormatterStyle.NoStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
         self.timeField.text = dateFormatter.stringFromDate(self.timePicker.date)
+        updateSave()
     }
     
     @IBAction func onSave() {
@@ -259,7 +264,21 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
     }
     
-
+    func checkFieldsHaveValue() ->Bool {
+        return ((self.startLocField.text != "") &&
+                (self.endLocField.text != "") &&
+                (self.dateField.text != "") &&
+                (self.timeField.text != "") &&
+                (self.numSpotsField.text != ""))
+    }
+    
+    func updateSave() {
+        if (checkFieldsHaveValue()) {
+            self.saveButton.enabled = true
+        } else {
+            self.saveButton.enabled = false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -273,9 +292,15 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         if (self.ride.end_location != "") {
             self.endLocField.text = self.ride.end_location
         }
-        updateSelectedIdx()
+        self.dateField.text = String(self.ride.date)
+        self.timeField.text = String(self.ride.time)
+        if (self.ride.spots != 0) {
+            self.numSpotsField.text = String(self.ride.spots)
+        }
         self.locationArray = self.ride.locations as! [String]
+        updateSelectedIdx()
         print(self.locationArray)
+        updateSave()
     }
 
     override func didReceiveMemoryWarning() {
