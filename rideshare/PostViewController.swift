@@ -225,6 +225,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         rideService = RideService()
         activeField.on = rideService.isRideActive()
         print(Ride.sharedInstance.ride_id)

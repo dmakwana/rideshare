@@ -157,6 +157,7 @@ class SearchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         self.locationArray = self.ride.locations as! [String]
         updateSearchButton()
     }

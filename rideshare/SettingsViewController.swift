@@ -16,25 +16,52 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var nameText: UITextField!
     @IBOutlet var emailText: UITextField!
     @IBOutlet var numberText: UITextField!
+    @IBOutlet var carNameText: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         // Do any additional setup after loading the view, typically from a nib.
         nameText.delegate = self
         emailText.delegate = self
         numberText.delegate = self
-        
+        nameText.enabled = false
+        emailText.enabled = false
         // Set values of name,email fields to Facebook data
         nameText.text = user.full_name
         emailText.text = user.email
         
         numberText.keyboardType = UIKeyboardType.NumberPad
+        carNameText.keyboardType = UIKeyboardType.Alphabet
+    }
+    
+    @IBAction func editCarNameComplete(sender: AnyObject) {
+        doneEditingCarName()
+    }
+    
+    @IBAction func editCarName(sender: UITextField) {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.Default
+        toolBar.translucent = true
+        toolBar.tintColor = UIColor.purpleColor()
+        toolBar.sizeToFit()
+        
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "doneEditingCarName")
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        self.carNameText.inputAccessoryView = toolBar
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
+    }
+    
+    func doneEditingCarName() {
+        self.carNameText.resignFirstResponder()
     }
     
     // MARK: Actions
@@ -52,31 +79,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    
-    // Stops editing ability for name and email
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        
-        if((textField == nameText)||(textField == emailText)){
-            return false
-        }
-        return true
-    }
-    
-    
     @IBAction func saveButton(sender: UIButton) {
-        
         // Set user's phone number
         user.phone_number = numberText.text!
+        user.car_name = carNameText.text!
         let userService = UserService()
         userService.updateUser()
-        
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
-    
-    
 }

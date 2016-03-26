@@ -211,7 +211,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-Ov-B8W">
-                                <rect key="frame" x="20" y="80" width="560" height="150"/>
+                                <rect key="frame" x="20" y="80" width="560" height="210"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-BA-aiq">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -227,6 +227,15 @@
                                         <rect key="frame" x="0.0" y="120" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Car Make/Model" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55d-xY-2bR">
+                                        <rect key="frame" x="0.0" y="180" width="560" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="editCarName:" destination="qmC-hJ-b3k" eventType="editingDidBegin" id="aNt-0J-2gc"/>
+                                            <action selector="editCarNameComplete:" destination="qmC-hJ-b3k" eventType="editingDidEnd" id="Rim-4m-Km8"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -250,6 +259,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings-Small" id="I2c-82-BeL"/>
                     <connections>
+                        <outlet property="carNameText" destination="55d-xY-2bR" id="jTV-IT-Ezr"/>
                         <outlet property="emailText" destination="xdp-E2-2y4" id="yS7-K1-tJu"/>
                         <outlet property="nameText" destination="Mph-BA-aiq" id="cHM-am-cTU"/>
                         <outlet property="numberText" destination="inD-xL-2Ol" id="db4-YE-JzH"/>
