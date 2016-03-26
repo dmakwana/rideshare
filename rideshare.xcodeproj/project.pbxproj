@@ -25,6 +25,7 @@
 		C2B957121C95F742000DC681 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2B957101C95F742000DC681 /* Main.storyboard */; };
 		C2B957171C95F742000DC681 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2B957151C95F742000DC681 /* LaunchScreen.storyboard */; };
 		C2B9571F1C95FD12000DC681 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2B9571E1C95FD12000DC681 /* Assets.xcassets */; };
+		C2C015D11CA64FBA001AC9A9 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C015D01CA64FBA001AC9A9 /* LocationHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		C2B957161C95F742000DC681 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C2B957181C95F742000DC681 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2B9571E1C95FD12000DC681 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C2C015D01CA64FBA001AC9A9 /* LocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				922591ED1C960EAE00DD0C19 /* FBSDKLoginKit.framework */,
 				922591EE1C960EAE00DD0C19 /* FBSDKShareKit.framework */,
 				A808FD111CA6482200027DCB /* SearchResultCell.swift */,
+				C2C015D01CA64FBA001AC9A9 /* LocationHelper.swift */,
 			);
 			path = rideshare;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2C015D11CA64FBA001AC9A9 /* LocationHelper.swift in Sources */,
 				A8739A9F1CA636A200A4C347 /* DisplaySearchResultsViewController.swift in Sources */,
 				A8739A991CA5ACD500A4C347 /* UserService.swift in Sources */,
 				A8739A9D1CA5E3DB00A4C347 /* RideService.swift in Sources */,

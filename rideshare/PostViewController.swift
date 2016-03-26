@@ -9,16 +9,11 @@
 import UIKit
 
 class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
-    
+
     enum PickerTag: Int {
         case StartLocPickerTag
         case EndLocPickerTag
         case NumSpotsPickerTag
-    }
-    
-    enum LocationPickerTag: Int {
-        case StartLocPickerTag
-        case EndLocPickerTag
     }
 
     @IBOutlet var activeField: UISwitch!
@@ -28,7 +23,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet var endLocField: UITextField!
     @IBOutlet var numSpotsField: UITextField!
     @IBOutlet var saveButton: UIButton!
-    
+
     var startLocPicker: UIPickerView!
     var endLocPicker: UIPickerView!
     var datePicker: UIDatePicker!
@@ -37,68 +32,16 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var pickerData = ["1","2","3","4"]
     var rideService: RideService!
     var locations: NSArray!
-    var startLocationIdx: Int!
-    var endLocationIdx: Int!
     var ride = Ride.sharedInstance
     var startIdx = -1
     var endIdx = -1
     var locationArray: [String]!
-    
+    var locHelper = LocationHelper()
+
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    
-    func getActualRow(tag: LocationPickerTag, row : Int) -> Int {
-        var idx = -1
-        if (tag == LocationPickerTag.StartLocPickerTag) {
-            idx  = self.endIdx
-        } else {
-            idx = self.startIdx
-        }
-        print("row: ", row, " idx: ", idx)
-        if (idx != -1) {
-            if (row < idx) {
-                return row
-            } else {
-                return row + 1
-            }
-        } else {
-            return row
-        }
-    }
-    
-    func getActualString(tag: LocationPickerTag, row : Int) -> String {
-        var idx = -1
-        if (tag == LocationPickerTag.StartLocPickerTag) {
-            idx  = self.endIdx
-        } else {
-            idx = self.startIdx
-        }
-        if (idx == -1) {
-            return String(locationArray[row])
-        } else {
-            if (row < idx) {
-                return String(locationArray[row])
-            } else {
-                return String(locationArray[row + 1])
-            }
-        }
-    }
-    
-    func getActualSize(tag: LocationPickerTag) -> Int {
-        var idx = -1
-        if (tag == LocationPickerTag.StartLocPickerTag) {
-            idx  = self.endIdx
-        } else {
-            idx = self.startIdx
-        }
-        if (idx == -1) {
-            return self.locationArray.count
-        } else {
-            return (self.locationArray.count - 1)
-        }
-    }
-    
+
     func updateSelectedIdx() {
         if (self.locationArray.indexOf(self.ride.start_location) != nil) {
             self.startIdx = self.locationArray.indexOf(self.ride.start_location)!
@@ -107,35 +50,35 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             self.endIdx = self.locationArray.indexOf(self.ride.end_location)!
         }
     }
-    
+
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let tag = PickerTag(rawValue: pickerView.tag) {
             switch tag {
             case PickerTag.NumSpotsPickerTag:
                 return pickerData.count
             case PickerTag.StartLocPickerTag:
-                return getActualSize(LocationPickerTag.StartLocPickerTag)
+                return self.locHelper.getActualSize(LocationHelper.LocationPickerTag.StartLocPickerTag, startIdx: startIdx, endIdx: endIdx, locArrayLength: locationArray.count)
             case PickerTag.EndLocPickerTag:
-                return getActualSize(LocationPickerTag.EndLocPickerTag)
+                return self.locHelper.getActualSize(LocationHelper.LocationPickerTag.EndLocPickerTag, startIdx: self.startIdx, endIdx: self.endIdx, locArrayLength: self.locationArray.count)
             }
         }
         return 0
     }
-    
+
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let tag = PickerTag(rawValue: pickerView.tag) {
             switch tag {
             case PickerTag.NumSpotsPickerTag:
                 return pickerData[row]
             case PickerTag.StartLocPickerTag:
-                return getActualString(LocationPickerTag.StartLocPickerTag, row: row)
+                return self.locHelper.getActualString(LocationHelper.LocationPickerTag.StartLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx, locationArray: self.locationArray)
             case PickerTag.EndLocPickerTag:
-                return getActualString(LocationPickerTag.EndLocPickerTag, row: row)
+                return self.locHelper.getActualString(LocationHelper.LocationPickerTag.EndLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx, locationArray: self.locationArray)
             }
         }
         return ""
     }
-    
+
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let tag = PickerTag(rawValue: pickerView.tag) {
             switch tag {
@@ -144,19 +87,19 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 updateSave()
                 self.numSpotsField.resignFirstResponder()
             case PickerTag.StartLocPickerTag:
-                self.startIdx = getActualRow(LocationPickerTag.StartLocPickerTag, row: row)
-                startLocField.text = String(locations[getActualRow(LocationPickerTag.StartLocPickerTag, row: row)])
+                self.startIdx = self.locHelper.getActualRow(LocationHelper.LocationPickerTag.StartLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx)
+                startLocField.text = locationArray[self.startIdx]
                 updateSave()
                 self.startLocField.resignFirstResponder()
             case PickerTag.EndLocPickerTag:
-                self.endIdx = getActualRow((LocationPickerTag.EndLocPickerTag), row: row)
-                endLocField.text = String(locations[getActualRow(LocationPickerTag.EndLocPickerTag, row: row)])
+                self.endIdx = self.locHelper.getActualRow(LocationHelper.LocationPickerTag.EndLocPickerTag, row: row, startIdx: self.startIdx, endIdx: self.endIdx)
+                endLocField.text = locationArray[self.endIdx]
                 updateSave()
                 self.endLocField.resignFirstResponder()
             }
         }
     }
-    
+
     @IBAction func endLocEditing(sender: UITextField) {
         self.endLocPicker = UIPickerView()
         self.endLocPicker.tag = PickerTag.EndLocPickerTag.rawValue
@@ -164,7 +107,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.endLocPicker.delegate = self
         self.endLocPicker.dataSource = self
     }
-    
+
     @IBAction func startLocEditing(sender: UITextField) {
         self.startLocPicker = UIPickerView()
         self.startLocPicker.tag = PickerTag.StartLocPickerTag.rawValue
@@ -172,7 +115,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.startLocPicker.delegate = self
         self.startLocPicker.dataSource = self
     }
-    
+
     @IBAction func numSpotsEditing(sender: UITextField) {
         self.numSpotsPicker = UIPickerView()
         self.numSpotsPicker.tag = PickerTag.NumSpotsPickerTag.rawValue
@@ -180,59 +123,59 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.numSpotsPicker.delegate = self
         self.numSpotsPicker.dataSource = self
     }
-    
+
     @IBAction func timeEditing(sender: UITextField) {
         self.timePicker = UIDatePicker()
         self.timePicker.datePickerMode = UIDatePickerMode.Time
-        
+
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.Default
         toolBar.translucent = true
         toolBar.tintColor = UIColor.purpleColor()
         toolBar.sizeToFit()
-        
+
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "doneTimePicker")
-        
+
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.userInteractionEnabled = true
-        
+
         self.timeField.inputView = self.timePicker
         self.timeField.inputAccessoryView = toolBar
-        
+
         self.timePicker.addTarget(self, action: Selector("timePickerValueChanged"), forControlEvents: UIControlEvents.ValueChanged);
     }
 
     @IBAction func dateEditing(sender: UITextField) {
         self.datePicker = UIDatePicker()
         self.datePicker.datePickerMode = UIDatePickerMode.Date
-        
+
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.Default
         toolBar.translucent = true
         toolBar.tintColor = UIColor.purpleColor()
         toolBar.sizeToFit()
-        
+
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "doneDatePicker")
-        
+
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.userInteractionEnabled = true
-        
+
         self.dateField.inputView = self.datePicker
         self.dateField.inputAccessoryView = toolBar
-        
+
         self.datePicker.addTarget(self, action: Selector("datePickerValueChanged"), forControlEvents: UIControlEvents.ValueChanged);
     }
-    
+
     func doneDatePicker() {
         self.dateField.resignFirstResponder()
     }
-    
+
     func doneTimePicker() {
         self.timeField.resignFirstResponder()
     }
-    
+
     func datePickerValueChanged() {
         print("Date Picker Value Changed");
         let dateFormatter = NSDateFormatter()
@@ -241,7 +184,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.dateField.text = dateFormatter.stringFromDate(self.datePicker.date)
         updateSave()
     }
-    
+
     func timePickerValueChanged() {
         print("Time Picker Value Changed");
         let dateFormatter = NSDateFormatter()
@@ -250,7 +193,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.timeField.text = dateFormatter.stringFromDate(self.timePicker.date)
         updateSave()
     }
-    
+
     @IBAction func onSave() {
         let startLoc = startLocField.text!
         let endLoc = endLocField.text!
@@ -259,11 +202,11 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         let numSpotString = numSpotsField.text!
         let numSpots = Int(numSpotString)!
         let activeBool = activeField.on
-        
+
         print(numSpots)
         rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
     }
-    
+
     func checkFieldsHaveValue() ->Bool {
         return ((self.startLocField.text != "") &&
                 (self.endLocField.text != "") &&
@@ -271,7 +214,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 (self.timeField.text != "") &&
                 (self.numSpotsField.text != ""))
     }
-    
+
     func updateSave() {
         if (checkFieldsHaveValue()) {
             self.saveButton.enabled = true
@@ -279,7 +222,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             self.saveButton.enabled = false
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         rideService = RideService()
@@ -299,7 +242,6 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         }
         self.locationArray = self.ride.locations as! [String]
         updateSelectedIdx()
-        print(self.locationArray)
         updateSave()
     }
 
@@ -307,4 +249,3 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         super.didReceiveMemoryWarning();
     }
 }
-
