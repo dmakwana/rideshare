@@ -114,8 +114,8 @@ class RideService: NSObject {
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-                NSNotificationCenter.defaultCenter().postNotificationName("dataLoaded", object: result)
-                print(result)
+                NSNotificationCenter.defaultCenter().postNotificationName("ridesFetched", object: result)
+                //print(result)
                 
             } catch {
                 print("Error while parsing the result from HTTP POST request")

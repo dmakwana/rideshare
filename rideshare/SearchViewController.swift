@@ -55,6 +55,14 @@ class SearchViewController: UIViewController {
         
         let controller: DisplaySearchResultsViewController = DisplaySearchResultsViewController.init(nibName: nil, bundle: nil)
         self.navigationController?.pushViewController(controller, animated: false)
+        //self.presentViewController(controller, animated: false) { () -> Void in
+            //print("success")
+        //}
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     

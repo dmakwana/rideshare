@@ -135,8 +135,9 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         print(Ride.sharedInstance.ride_id)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning();
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
 
