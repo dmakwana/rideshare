@@ -11,10 +11,14 @@ import UIKit
 class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
     enum PickerTag: Int {
-        // Integer values will be implicitly supplied; you could optionally set your own values
         case StartLocPickerTag
         case EndLocPickerTag
         case NumSpotsPickerTag
+    }
+    
+    enum LocationPickerTag: Int {
+        case StartLocPickerTag
+        case EndLocPickerTag
     }
 
     @IBOutlet var activeField: UISwitch!
@@ -33,9 +37,74 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var pickerData = ["1","2","3","4"]
     var rideService: RideService!
     var locations: NSArray!
+    var startLocationIdx: Int!
+    var endLocationIdx: Int!
+    var ride = Ride.sharedInstance
+    var startIdx = -1
+    var endIdx = -1
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
+    }
+    
+    func getActualRow(tag: LocationPickerTag, row : Int) -> Int {
+        var idx = -1
+        if (tag == LocationPickerTag.StartLocPickerTag) {
+            idx  = self.endIdx
+        } else {
+            idx = self.startIdx
+        }
+        print("row: ", row, " idx: ", idx)
+        if (idx != -1) {
+            if (row < idx) {
+                return row
+            } else {
+                return row + 1
+            }
+        } else {
+            return row
+        }
+    }
+    
+    func getActualString(tag: LocationPickerTag, row : Int) -> String {
+        var idx = -1
+        if (tag == LocationPickerTag.StartLocPickerTag) {
+            idx  = self.endIdx
+        } else {
+            idx = self.startIdx
+        }
+        if (idx == -1) {
+            return String(locations[row])
+        } else {
+            if (row < idx) {
+                return String(locations[row])
+            } else {
+                return String(locations[row + 1])
+            }
+        }
+    }
+    
+    func getActualSize(tag: LocationPickerTag) -> Int {
+        var idx = -1
+        if (tag == LocationPickerTag.StartLocPickerTag) {
+            idx  = self.endIdx
+        } else {
+            idx = self.startIdx
+        }
+        if (idx == -1) {
+            return self.ride.locations.count
+        } else {
+            return (self.ride.locations.count - 1)
+        }
+    }
+    
+    func updateSelectedIdx() {
+        if (self.ride.locations.indexOf(self.ride.start_location) != nil) {
+            self.startIdx = self.ride.locations.indexOf(self.ride.start_location)!
+        }
+        if (self.ride.locations.indexOf(self.ride.end_location) != nil) {
+            self.endIdx = self.ride.locations.indexOf(self.ride.end_location)!
+        }
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -44,12 +113,12 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             case PickerTag.NumSpotsPickerTag:
                 return pickerData.count
             case PickerTag.StartLocPickerTag:
-                return locations.count
+                return getActualSize(LocationPickerTag.StartLocPickerTag)
             case PickerTag.EndLocPickerTag:
-                return locations.count
+                return getActualSize(LocationPickerTag.EndLocPickerTag)
             }
         }
-        return 1
+        return 0
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -58,9 +127,9 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             case PickerTag.NumSpotsPickerTag:
                 return pickerData[row]
             case PickerTag.StartLocPickerTag:
-                return String(locations[row])
+                return getActualString(LocationPickerTag.StartLocPickerTag, row: row)
             case PickerTag.EndLocPickerTag:
-                return String(locations[row])
+                return getActualString(LocationPickerTag.EndLocPickerTag, row: row)
             }
         }
         return ""
@@ -73,10 +142,12 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 numSpotsField.text = pickerData[row]
                 self.numSpotsField.resignFirstResponder()
             case PickerTag.StartLocPickerTag:
-                startLocField.text = String(locations[row])
+                self.startIdx = getActualRow(LocationPickerTag.StartLocPickerTag, row: row)
+                startLocField.text = String(locations[getActualRow(LocationPickerTag.StartLocPickerTag, row: row)])
                 self.startLocField.resignFirstResponder()
             case PickerTag.EndLocPickerTag:
-                endLocField.text = String(locations[row])
+                self.endIdx = getActualRow((LocationPickerTag.EndLocPickerTag), row: row)
+                endLocField.text = String(locations[getActualRow(LocationPickerTag.EndLocPickerTag, row: row)])
                 self.endLocField.resignFirstResponder()
             }
         }
@@ -187,12 +258,22 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         rideService.saveRide(startLoc, end: endLoc, date: dateText, time: timeString, spots: numSpots, active: activeBool)
     }
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         rideService = RideService()
         activeField.on = rideService.isRideActive()
         print(Ride.sharedInstance.ride_id)
-        self.locations = rideService.getLocations()
+        self.locations = self.ride.locations
+        if (self.ride.start_location != "") {
+            self.startLocField.text = self.ride.start_location
+        }
+        if (self.ride.end_location != "") {
+            self.endLocField.text = self.ride.end_location
+        }
+        updateSelectedIdx()
+        print(self.locations)
     }
 
     override func didReceiveMemoryWarning() {
