@@ -67,6 +67,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         
         // Set user's phone number
         user.phone_number = numberText.text!
+        let userService = UserService()
+        userService.updateUser()
+        
     }
     
     
