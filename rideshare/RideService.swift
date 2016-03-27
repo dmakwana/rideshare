@@ -54,6 +54,7 @@ class RideService: NSObject {
             }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                NSNotificationCenter.defaultCenter().postNotificationName("successfulPost", object: nil)
                 ride.updateRide(result!)
                                 
             } catch {

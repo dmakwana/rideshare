@@ -16,6 +16,8 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "errorOccured:",name:"errorOccured", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "successfulSave:", name: "successfulSave", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "successfulPost:", name: "successfulPost", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -36,7 +38,7 @@ class BaseViewController: UIViewController {
         }
     }
     
-    func showBannerWithText(text: String) {
+    func showBannerWithText(text: String, color : UIColor) {
         
         // This function gets called from the background thread and we need to run it on the UI thread
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
@@ -45,12 +47,21 @@ class BaseViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue()) {
                 self.banner.hidden = false
                 self.banner.textLabel.text = text
+                self.banner.backgroundColor = color
                 self.banner.setHiddenAnimated(true)
             }
         }
     }
     
+    func successfulSave(notification: NSNotification) {
+        self.showBannerWithText("Settings Updated!", color: UIColor.greenColor())
+    }
+    
+    func successfulPost(notification: NSNotification) {
+        self.showBannerWithText("Ride Updated!", color: UIColor.greenColor())
+    }
+    
     func errorOccured(notification: NSNotification) {
-        self.showBannerWithText("Something went wrong. Please try again later!")
+        self.showBannerWithText("Something went wrong. Please try again later!", color: UIColor.redColor())
     }
 }
