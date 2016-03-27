@@ -90,6 +90,8 @@ class UserService: NSObject {
             if (httpResponse?.statusCode != 200) {
                 NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
                 return
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName("successfulSave", object: nil)
             }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
