@@ -42,8 +42,6 @@ class UserService: NSObject {
             }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-                print(result)
-                
                 let rideService = RideService()
                 rideService.getRideFromServer()
                 rideService.getLocations()

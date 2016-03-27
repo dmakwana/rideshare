@@ -12,6 +12,7 @@ import MessageUI
 class DisplaySearchResultsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
     
     var tableView: UITableView = UITableView()
+    var bgLabel: UILabel = UILabel()
     var items = []
     
     override func viewDidLoad() {
@@ -31,6 +32,12 @@ class DisplaySearchResultsViewController: BaseViewController, UITableViewDelegat
         
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        self.bgLabel = UILabel(frame: CGRect(x: 0.0, y: self.tableView.frame.origin.y + self.tableView.frame.height/2.0, width: self.tableView.frame.width, height: 30.0))
+        self.bgLabel.text = "No Rides Found"
+        self.bgLabel.textAlignment = .Center
+        self.tableView.backgroundView = self.bgLabel
+        
         self.view.addSubview(self.tableView)
     }
     
@@ -45,11 +52,15 @@ class DisplaySearchResultsViewController: BaseViewController, UITableViewDelegat
     func dataLoaded(notification: NSNotification) {
         let jsonData = notification.object as! NSDictionary
         items = jsonData.valueForKey("rides") as! NSArray
-        print(items.count)
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             // do some task
             dispatch_async(dispatch_get_main_queue()) {
+                if (self.items.count == 0) {
+                    self.tableView.backgroundView?.hidden = false
+                } else {
+                    self.tableView.backgroundView?.hidden = true
+                }
                 self.tableView.reloadData()
             }
         }

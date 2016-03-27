@@ -16,12 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
         let rideService = RideService()
         rideService.getLocations()
         UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20.0)!, NSForegroundColorAttributeName : UIColor.grayColor()]
-        //UINavigationBar.appearance().barTintColor = UIColor(red: 255/255.0, green: 95/255.0, blue: 0/255.0, alpha: 1)
-        //UINavigationBar.appearance().barTintColor = UIColor.lightGrayColor()
         UINavigationBar.appearance().tintColor = UIColor.grayColor()
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

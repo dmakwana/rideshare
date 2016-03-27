@@ -38,6 +38,7 @@ class BaseViewController: UIViewController {
     
     func showBannerWithText(text: String) {
         
+        // This function gets called from the background thread and we need to run it on the UI thread
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             // do some task
