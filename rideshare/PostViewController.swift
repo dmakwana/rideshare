@@ -215,7 +215,7 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
             activePostLabel.textColor = UIColor.greenColor()
         }
         else {
-            activePostLabel.textColor = UIColor.lightGrayColor()
+            activePostLabel.textColor = UIColor(red: 0.765, green: 0.796, blue: 0.851, alpha: 1.0)
         }
     }
 
