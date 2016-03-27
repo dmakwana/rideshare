@@ -90,10 +90,12 @@ class DisplaySearchResultsViewController: BaseViewController, UITableViewDelegat
         let ride = item.valueForKey("ride") as! NSDictionary
         
         cell.driverNameLabel.text = driver.valueForKey("full_name") as? String
-        cell.startLabel.text = ride.valueForKey("start_location") as? String
-        cell.endLabel.text = ride.valueForKey("end_location") as? String
+        let location_string = (ride.valueForKey("start_location") as! String) + " to " + (ride.valueForKey("end_location") as! String)
+        cell.locationLabel.text = location_string
         cell.dateLabel.text = ride.valueForKey("date") as? String
         cell.timeLabel.text = ride.valueForKey("time") as? String
+        cell.carLabel.text = driver.valueForKey("car_name") as? String
+        print(driver)
         cell.setImageForCell(driver.valueForKey("profile_picture") as? String)
         return cell
     }
@@ -106,7 +108,7 @@ class DisplaySearchResultsViewController: BaseViewController, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100.0
+        return 120.0
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

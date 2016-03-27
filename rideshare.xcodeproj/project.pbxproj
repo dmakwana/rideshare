@@ -106,6 +106,7 @@
 				C2B9570E1C95F742000DC681 /* PostViewController.swift */,
 				C22037C81CA5A8F500B886E3 /* SearchViewController.swift */,
 				A8739A9E1CA636A200A4C347 /* DisplaySearchResultsViewController.swift */,
+				A808FD111CA6482200027DCB /* SearchResultCell.swift */,
 				C22037CA1CA5A92C00B886E3 /* SettingsViewController.swift */,
 				C2B957101C95F742000DC681 /* Main.storyboard */,
 				C2B957151C95F742000DC681 /* LaunchScreen.storyboard */,
@@ -115,7 +116,6 @@
 				922591EC1C960EAE00DD0C19 /* FBSDKCoreKit.framework */,
 				922591ED1C960EAE00DD0C19 /* FBSDKLoginKit.framework */,
 				922591EE1C960EAE00DD0C19 /* FBSDKShareKit.framework */,
-				A808FD111CA6482200027DCB /* SearchResultCell.swift */,
 				C2C015D01CA64FBA001AC9A9 /* LocationHelper.swift */,
 			);
 			path = rideshare;
