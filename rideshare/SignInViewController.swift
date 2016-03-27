@@ -33,6 +33,11 @@ class SignInViewController: BaseViewController, FBSDKLoginButtonDelegate {
         {
             self.tabBarController!.selectedIndex = 1;
             self.tabBarController!.selectedViewController = self.tabBarController?.viewControllers![1]
+            var item = self.tabBarController!.tabBar.items![0] as UITabBarItem
+            item.title = "Sign Out"
+        } else {
+            var item = self.tabBarController!.tabBar.items![0] as UITabBarItem
+            item.title = "Sign In"
         }
     }
     
