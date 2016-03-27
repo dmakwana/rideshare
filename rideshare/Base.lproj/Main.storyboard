@@ -169,15 +169,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msT-MK-YCi">
-                                <rect key="frame" x="268" y="457" width="65" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="tintColor" red="0.26274509800000001" green="0.83137254900000002" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Search"/>
-                                <connections>
-                                    <action selector="searchRides:" destination="IQV-fU-WOX" eventType="touchUpInside" id="XLt-bT-nO4"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sVP-V0-yqX">
                                 <rect key="frame" x="20" y="164" width="560" height="150"/>
                                 <subviews>
@@ -213,6 +204,15 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msT-MK-YCi">
+                                <rect key="frame" x="263" y="457" width="74" height="35"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="24"/>
+                                <color key="tintColor" red="0.26274509800000001" green="0.83137254900000002" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="searchRides:" destination="IQV-fU-WOX" eventType="touchUpInside" id="XLt-bT-nO4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.1019607843" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -250,27 +250,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-Ov-B8W">
-                                <rect key="frame" x="20" y="80" width="560" height="210"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-Ov-B8W">
+                                <rect key="frame" x="20" y="164" width="560" height="210"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mph-BA-aiq">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdp-E2-2y4">
                                         <rect key="frame" x="0.0" y="60" width="560" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="inD-xL-2Ol">
                                         <rect key="frame" x="0.0" y="120" width="560" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Car Make/Model" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55d-xY-2bR">
                                         <rect key="frame" x="0.0" y="180" width="560" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="editCarName:" destination="qmC-hJ-b3k" eventType="editingDidBegin" id="aNt-0J-2gc"/>
@@ -281,19 +281,29 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GCD-RB-qX1">
                                 <rect key="frame" x="275" y="457" width="51" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="24"/>
+                                <color key="tintColor" red="0.26274509800000001" green="0.83137254900000002" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveButton:" destination="qmC-hJ-b3k" eventType="touchUpInside" id="We2-aL-QNe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asb-cW-2Sg">
+                                <rect key="frame" x="201" y="104" width="198" height="34"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.1019607843" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="OJJ-Ov-B8W" firstAttribute="leading" secondItem="YwV-gJ-sL6" secondAttribute="leadingMargin" id="2h8-2H-TuW"/>
-                            <constraint firstItem="OJJ-Ov-B8W" firstAttribute="top" secondItem="crj-pi-fwF" secondAttribute="bottom" constant="60" id="dGX-We-w0X"/>
+                            <constraint firstItem="Asb-cW-2Sg" firstAttribute="top" secondItem="crj-pi-fwF" secondAttribute="bottom" constant="40" id="G7b-Xt-Gez"/>
+                            <constraint firstItem="OJJ-Ov-B8W" firstAttribute="top" secondItem="crj-pi-fwF" secondAttribute="bottom" constant="100" id="dGX-We-w0X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OJJ-Ov-B8W" secondAttribute="trailing" id="dxJ-QJ-98g"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GCD-RB-qX1" secondAttribute="trailing" id="gZc-Hp-blm"/>
+                            <constraint firstItem="Asb-cW-2Sg" firstAttribute="leading" secondItem="YwV-gJ-sL6" secondAttribute="leadingMargin" id="iAR-Cn-Lsu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Asb-cW-2Sg" secondAttribute="trailing" id="kxc-1h-6bG"/>
                             <constraint firstItem="GCD-RB-qX1" firstAttribute="leading" secondItem="YwV-gJ-sL6" secondAttribute="leadingMargin" id="wd3-aq-5KT"/>
                         </constraints>
                     </view>
