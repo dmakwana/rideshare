@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class DisplaySearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
+class DisplaySearchResultsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
     
     var tableView: UITableView = UITableView()
     var items = []

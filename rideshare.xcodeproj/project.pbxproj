@@ -18,6 +18,8 @@
 		A8739A9D1CA5E3DB00A4C347 /* RideService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8739A9C1CA5E3DB00A4C347 /* RideService.swift */; };
 		A8739A9F1CA636A200A4C347 /* DisplaySearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8739A9E1CA636A200A4C347 /* DisplaySearchResultsViewController.swift */; };
 		A898AAC31CA74EDA00AB5550 /* RideShareTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A898AAC21CA74EDA00AB5550 /* RideShareTabBarController.swift */; };
+		A898AAC51CA779EA00AB5550 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A898AAC41CA779EA00AB5550 /* Banner.swift */; };
+		A898AAC71CA77B2200AB5550 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A898AAC61CA77B2200AB5550 /* BaseViewController.swift */; };
 		C22037C91CA5A8F500B886E3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22037C81CA5A8F500B886E3 /* SearchViewController.swift */; };
 		C22037CB1CA5A92C00B886E3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22037CA1CA5A92C00B886E3 /* SettingsViewController.swift */; };
 		C2B9570B1C95F742000DC681 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B9570A1C95F742000DC681 /* AppDelegate.swift */; };
@@ -42,6 +44,8 @@
 		A8739A9C1CA5E3DB00A4C347 /* RideService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideService.swift; sourceTree = "<group>"; };
 		A8739A9E1CA636A200A4C347 /* DisplaySearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplaySearchResultsViewController.swift; sourceTree = "<group>"; };
 		A898AAC21CA74EDA00AB5550 /* RideShareTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideShareTabBarController.swift; sourceTree = "<group>"; };
+		A898AAC41CA779EA00AB5550 /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		A898AAC61CA77B2200AB5550 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C22037C81CA5A8F500B886E3 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C22037CA1CA5A92C00B886E3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C2B957071C95F742000DC681 /* rideshare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rideshare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +96,8 @@
 			children = (
 				C2B9570A1C95F742000DC681 /* AppDelegate.swift */,
 				A898AAC21CA74EDA00AB5550 /* RideShareTabBarController.swift */,
+				A898AAC41CA779EA00AB5550 /* Banner.swift */,
+				A898AAC61CA77B2200AB5550 /* BaseViewController.swift */,
 				A8739A961CA5A15700A4C347 /* User.swift */,
 				A8739A981CA5ACD500A4C347 /* UserService.swift */,
 				A8739A9A1CA5E39600A4C347 /* Ride.swift */,
@@ -192,12 +198,14 @@
 				A8739A991CA5ACD500A4C347 /* UserService.swift in Sources */,
 				A8739A9D1CA5E3DB00A4C347 /* RideService.swift in Sources */,
 				A8739A9B1CA5E39600A4C347 /* Ride.swift in Sources */,
+				A898AAC71CA77B2200AB5550 /* BaseViewController.swift in Sources */,
 				A8739A971CA5A15700A4C347 /* User.swift in Sources */,
 				C2B9570F1C95F742000DC681 /* PostViewController.swift in Sources */,
 				C2B9570B1C95F742000DC681 /* AppDelegate.swift in Sources */,
 				C22037C91CA5A8F500B886E3 /* SearchViewController.swift in Sources */,
 				C22037CB1CA5A92C00B886E3 /* SettingsViewController.swift in Sources */,
 				A898AAC31CA74EDA00AB5550 /* RideShareTabBarController.swift in Sources */,
+				A898AAC51CA779EA00AB5550 /* Banner.swift in Sources */,
 				A808FD121CA6482200027DCB /* SearchResultCell.swift in Sources */,
 				C2B9570D1C95F742000DC681 /* SignInViewController.swift in Sources */,
 			);

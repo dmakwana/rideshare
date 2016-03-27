@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
+class SignInViewController: BaseViewController, FBSDKLoginButtonDelegate {
 
     let user = User.sharedInstance
     

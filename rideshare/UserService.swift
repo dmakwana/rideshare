@@ -29,10 +29,17 @@ class UserService: NSObject {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         } catch {
             print("Error while serializing params to POST Body")
+            NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+            return
         }
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let httpResponse = response as? NSHTTPURLResponse
+            if (httpResponse?.statusCode != 200) {
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+                return
+            }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 print(result)
@@ -42,6 +49,7 @@ class UserService: NSObject {
                 rideService.getLocations()
             } catch {
                 print("Error while parsing the result from HTTP POST request")
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
             }
         }
 
@@ -73,15 +81,24 @@ class UserService: NSObject {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         } catch {
             print("Error while serializing params to POST Body")
+            NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+            return
         }
+        
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let httpResponse = response as? NSHTTPURLResponse
+            if (httpResponse?.statusCode != 200) {
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+                return
+            }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 print(result)
             } catch {
                 print("Error while parsing the result from HTTP POST request")
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
             }
         }
         

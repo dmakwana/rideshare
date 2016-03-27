@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class SearchViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
     enum PickerTag: Int {
         case StartLocPickerTag

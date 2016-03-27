@@ -41,16 +41,24 @@ class RideService: NSObject {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         } catch {
             print("Error while serializing params to POST Body")
+            NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+            return
         }
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let httpResponse = response as? NSHTTPURLResponse
+            if (httpResponse?.statusCode != 200) {
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+                return
+            }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 ride.updateRide(result!)
                                 
             } catch {
                 print("Error while parsing the result from HTTP POST request")
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
             }
         }
         
@@ -107,10 +115,17 @@ class RideService: NSObject {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         } catch {
             print("Error while serializing params to POST Body")
+            NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+            return
         }
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let httpResponse = response as? NSHTTPURLResponse
+            if (httpResponse?.statusCode != 200) {
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+                return
+            }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 NSNotificationCenter.defaultCenter().postNotificationName("ridesFetched", object: result)
@@ -118,6 +133,7 @@ class RideService: NSObject {
                 
             } catch {
                 print("Error while parsing the result from HTTP POST request")
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
             }
         }
         
@@ -133,12 +149,18 @@ class RideService: NSObject {
         let url = NSURL(string: "http://rideshare.supreet.ca/ride/locations/")
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithURL(url!) { (data, response, error) -> Void in
+            let httpResponse = response as? NSHTTPURLResponse
+            if (httpResponse?.statusCode != 200) {
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
+                return
+            }
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 ride.locations = (result?.valueForKey("locations")) as! NSArray
                 NSNotificationCenter.defaultCenter().postNotificationName("locationsFetched", object: nil)
             } catch {
                 print("Error while parsing the result from HTTP POST request")
+                NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)
             }
         }
         

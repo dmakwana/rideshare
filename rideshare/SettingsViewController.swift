@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITextFieldDelegate {
+class SettingsViewController: BaseViewController, UITextFieldDelegate {
     
     // MARK: Properties
     let user = User.sharedInstance

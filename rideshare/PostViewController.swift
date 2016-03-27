@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate{
 
     enum PickerTag: Int {
         case StartLocPickerTag
