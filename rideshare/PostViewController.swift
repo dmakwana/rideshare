@@ -275,8 +275,11 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
         
         self.dateField.text = String(self.ride.date)
         self.timeField.text = String(self.ride.time)
-        self.numSpotsField.text = String(self.ride.spots)
-        
+        if (self.ride.spots == 0) {
+            self.numSpotsField.text = ""
+        } else {
+            self.numSpotsField.text = String(self.ride.spots)
+        }
         self.locationArray = self.ride.locations as! [String]
         
         updateSelectedIdx()
