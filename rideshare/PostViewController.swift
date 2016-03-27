@@ -242,7 +242,7 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.hideKeyboardWhenTappedAround() 
         rideService = RideService()
         activeField.on = rideService.isRideActive()
-        print(Ride.sharedInstance.ride_id)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationsLoaded:",name:"locationsFetched", object: nil)
         self.locations = self.ride.locations
         if (self.ride.start_location != "") {
             self.startLocField.text = self.ride.start_location
@@ -263,5 +263,9 @@ class PostViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func locationsLoaded(notification: NSNotification) {
+        self.locationArray = self.ride.locations as! [String]
     }
 }
