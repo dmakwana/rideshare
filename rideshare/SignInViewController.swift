@@ -110,6 +110,7 @@ class SignInViewController: BaseViewController, FBSDKLoginButtonDelegate {
                 
                 let userService = UserService()
                 userService.loginUserWithBackend()
+                userService.getUserFromServer()
 
             }
         })

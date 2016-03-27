@@ -16,7 +16,6 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "errorOccured:",name:"errorOccured", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "successfulSave:", name: "successfulSave", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "successfulPost:", name: "successfulPost", object: nil)
     }
     
@@ -51,10 +50,6 @@ class BaseViewController: UIViewController {
                 self.banner.setHiddenAnimated(true)
             }
         }
-    }
-    
-    func successfulSave(notification: NSNotification) {
-        self.showBannerWithText("Settings Updated!", color: UIColor.greenColor())
     }
     
     func successfulPost(notification: NSNotification) {

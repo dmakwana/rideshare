@@ -241,6 +241,7 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround() 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "rideDataLoaded:",name:"rideDataFetched", object: nil)
+        self.updateUI()
     }
 
     override func viewWillAppear(animated: Bool) {

@@ -35,4 +35,8 @@ class User {
         return dict
     }
     
+    func updateUser(result: NSDictionary) {
+        self.phone_number = result.valueForKey("phone_number") as! String
+        self.car_name = result.valueForKey("car_name") as! String
+    }
 }

@@ -54,6 +54,25 @@ class UserService: NSObject {
         task.resume()
     }
     
+    func getUserFromServer() {
+        
+        print("Get User from Server")
+        let user = User.sharedInstance
+        
+        let url = NSURL(string: "http://rideshare.supreet.ca/user/fetch/")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url!) { (data, response, error) -> Void in
+            do {
+                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                user.updateUser(result!)
+            } catch {
+                print("Error while parsing the result from HTTP POST request")
+            }
+        }
+        
+        task.resume()
+    }
+    
     
     func updateUser() {
         
@@ -103,7 +122,6 @@ class UserService: NSObject {
         }
         
         task.resume()
-        
     }
  
 }

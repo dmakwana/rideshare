@@ -33,6 +33,8 @@ class SettingsViewController: BaseViewController, UITextFieldDelegate {
         
         numberText.keyboardType = UIKeyboardType.NumberPad
         carNameText.keyboardType = UIKeyboardType.Alphabet
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "successfulSave:", name: "successfulSave", object: nil)
     }
     
     @IBAction func editCarNameComplete(sender: AnyObject) {
@@ -90,5 +92,14 @@ class SettingsViewController: BaseViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        print(User.sharedInstance.phone_number)
+        self.numberText.text = User.sharedInstance.phone_number
+        self.carNameText.text = User.sharedInstance.car_name
+
+    }
+    
+    func successfulSave(notification: NSNotification) {
+        self.showBannerWithText("Settings Updated!", color: UIColor.greenColor())
     }
 }
