@@ -284,6 +284,7 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
         
         updateSelectedIdx()
         updateSave()
+        activeSwitch(activeField)
     }
     
 }
