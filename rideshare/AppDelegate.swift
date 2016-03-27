@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rideService.getLocations()
         UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20.0)!, NSForegroundColorAttributeName : UIColor.grayColor()]
         UINavigationBar.appearance().tintColor = UIColor.grayColor()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
