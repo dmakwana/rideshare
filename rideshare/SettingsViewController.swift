@@ -37,6 +37,18 @@ class SettingsViewController: BaseViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "successfulSave:", name: "successfulSave", object: nil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        print("In Settings View Controller")
+        self.nameText.text = User.sharedInstance.full_name
+        self.emailText.text = User.sharedInstance.email
+        self.numberText.text = User.sharedInstance.phone_number
+        self.carNameText.text = User.sharedInstance.car_name
+        
+    }
+    
     @IBAction func editCarNameComplete(sender: AnyObject) {
         doneEditingCarName()
     }
@@ -87,16 +99,6 @@ class SettingsViewController: BaseViewController, UITextFieldDelegate {
         user.car_name = carNameText.text!
         let userService = UserService()
         userService.updateUser()
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        print(User.sharedInstance.phone_number)
-        self.numberText.text = User.sharedInstance.phone_number
-        self.carNameText.text = User.sharedInstance.car_name
-
     }
     
     func successfulSave(notification: NSNotification) {

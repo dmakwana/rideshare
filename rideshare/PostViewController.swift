@@ -241,12 +241,12 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround() 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "rideDataLoaded:",name:"rideDataFetched", object: nil)
-        self.updateUI()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.updateUI()
         
     }
     
@@ -270,17 +270,13 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
         activeField.on = rideService.isRideActive()
         
         self.locations = self.ride.locations
-        if (self.ride.start_location != "") {
-            self.startLocField.text = self.ride.start_location
-        }
-        if (self.ride.end_location != "") {
-            self.endLocField.text = self.ride.end_location
-        }
+        self.startLocField.text = self.ride.start_location
+        self.endLocField.text = self.ride.end_location
+        
         self.dateField.text = String(self.ride.date)
         self.timeField.text = String(self.ride.time)
-        if (self.ride.spots != 0) {
-            self.numSpotsField.text = String(self.ride.spots)
-        }
+        self.numSpotsField.text = String(self.ride.spots)
+        
         self.locationArray = self.ride.locations as! [String]
         
         updateSelectedIdx()

@@ -36,7 +36,19 @@ class User {
     }
     
     func updateUser(result: NSDictionary) {
+        print("User.updateUser()")
+        print(result)
         self.phone_number = result.valueForKey("phone_number") as! String
         self.car_name = result.valueForKey("car_name") as! String
+    }
+    
+    func clear() {
+        facebook_id = ""
+        access_token = ""
+        full_name = ""
+        profile_picture = ""
+        phone_number = ""
+        email = ""
+        car_name = ""
     }
 }

@@ -46,4 +46,17 @@ class Ride: NSObject {
         print(self.time)
     }
     
+    func clear() {
+        ride_id = -1
+        driver_id = ""
+        start_location = ""
+        end_location = ""
+        date = ""
+        time = ""
+        spots = 0
+        active = false
+        
+        locations = []
+    }
+    
 }

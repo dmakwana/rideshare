@@ -60,7 +60,7 @@ class SignInViewController: BaseViewController, FBSDKLoginButtonDelegate {
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email"){
             
-                // Do work
+                returnUserData()
             }
         }
     }
@@ -68,6 +68,11 @@ class SignInViewController: BaseViewController, FBSDKLoginButtonDelegate {
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("User Logged Out")
+        User.sharedInstance.clear()
+        Ride.sharedInstance.clear()
+        
+        let item = self.tabBarController!.tabBar.items![0] as UITabBarItem
+        item.title = "Sign In"
     }
     
 
