@@ -82,6 +82,7 @@ class RideService: NSObject {
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 ride.updateRide(result!)
+                print(result)
             } catch {
                 print("Error while parsing the result from HTTP POST request")
             }
@@ -157,7 +158,7 @@ class RideService: NSObject {
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 ride.locations = (result?.valueForKey("locations")) as! NSArray
-                NSNotificationCenter.defaultCenter().postNotificationName("locationsFetched", object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("rideDataFetched", object: nil)
             } catch {
                 print("Error while parsing the result from HTTP POST request")
                 NSNotificationCenter.defaultCenter().postNotificationName("errorOccured", object: nil)

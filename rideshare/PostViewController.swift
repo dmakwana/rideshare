@@ -240,9 +240,34 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround() 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rideDataLoaded:",name:"rideDataFetched", object: nil)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+    }
+    
+    func rideDataLoaded(notification: NSNotification) {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            // do some task
+            dispatch_async(dispatch_get_main_queue()) {
+                self.updateUI()
+            }
+        }
+
+    }
+    
+    func updateUI() {
+        self.ride = Ride.sharedInstance
+        self.locationArray = self.ride.locations as! [String]
+        print(self.ride.start_location)
+        
         rideService = RideService()
         activeField.on = rideService.isRideActive()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationsLoaded:",name:"locationsFetched", object: nil)
+        
         self.locations = self.ride.locations
         if (self.ride.start_location != "") {
             self.startLocField.text = self.ride.start_location
@@ -256,16 +281,9 @@ class PostViewController: BaseViewController, UIPickerViewDataSource, UIPickerVi
             self.numSpotsField.text = String(self.ride.spots)
         }
         self.locationArray = self.ride.locations as! [String]
+        
         updateSelectedIdx()
         updateSave()
     }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
     
-    func locationsLoaded(notification: NSNotification) {
-        self.locationArray = self.ride.locations as! [String]
-    }
 }
